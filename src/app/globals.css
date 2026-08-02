@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Anurati";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Anurati"), url("/fonts/Anurati-Regular.woff") format("woff"), url("https://fonts.cdnfonts.com/s/14024/Anurati-Regular.woff") format("woff");
+}
+
+:root {
+  --ink: #12231e;
+  --muted: #66736e;
+  --line: #e4e9e6;
+  --surface: #ffffff;
+  --canvas: #f5f7f6;
+  --brand: #13795b;
+  --brand-dark: #0d5f47;
+  --brand-soft: #e8f5ef;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: var(--font-body, "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif);
+  font-feature-settings: "ss01" 1, "cv11" 1;
+}
+h1, h2, h3, h4 { font-family: var(--font-display, "Space Grotesk", var(--font-body, system-ui, sans-serif)); letter-spacing: -0.02em; }
+.font-display { font-family: var(--font-display, "Space Grotesk", system-ui, sans-serif); }
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+::selection { background: #bce8d5; color: #0b3f30; }
+
+.focus-ring:focus-visible {
+  outline: 3px solid rgba(19, 121, 91, 0.2);
+  outline-offset: 2px;
+}
+.card-shadow { box-shadow: 0 1px 2px rgba(18, 35, 30, 0.04), 0 10px 30px rgba(18, 35, 30, 0.05); }
+.soft-shadow { box-shadow: 0 14px 50px rgba(13, 72, 54, 0.12); }
+.glass { background: rgba(255, 255, 255, 0.84); backdrop-filter: blur(18px); }
+.font-anurati {
+  font-family: "Anurati", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.brand-wordmark {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translateY(0.02em); /* natural Anurati metrics: even by design, no trailing imbalance to correct */
+}
+.brand-logo {
+  display: inline-block;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .4s ease;
+  will-change: transform;
+}
+.group\/brand:hover .brand-logo,
+.brand-logo:hover {
+  transform: rotate(10deg) scale(1.08);
+}
+.hide-scrollbar { scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .55; }
+}
+@keyframes ping-dot {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+.animate-fade-up { animation: fade-up .35s ease-out both; }
+.animate-pulse-soft { animation: pulse-soft 1.8s ease-in-out infinite; }
+.live-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #22c55e;
+  animation: ping-dot 1.5s cubic-bezier(0,0,.2,1) infinite;
+}
+
+input::placeholder, textarea::placeholder { color: #9aa6a1; }
+input[type="number"]::-webkit-inner-spin-button { opacity: .5; }
+
+@media (max-width: 767px) {
+  .mobile-safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+}
+
+/* One button size everywhere, matching the "Customer view" button: height 36px, horizontal
+   padding 12px, font 12px at weight 600, radius 12px. These rules are unlayered so they
+   override per-button height, padding and text-size utilities. Icon-only controls (which use
+   place-items-center) and toggle tracks (which use h-5) are intentionally left untouched. */
+button:not([class*="place-items-center"]):not([class*="h-5"]) {
+  height: 2.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 0.75rem;
+}
+.btnlink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  white-space: nowrap;
+}
