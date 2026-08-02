@@ -1,5 +1,5 @@
 import { asc, count, eq, inArray, ne, sql } from "drizzle-orm";
-import { db } from "@/db";
+import { db, ensureSchema } from "@/db";
 import { establishments, queueTickets, services, users } from "@/db/schema";
 import { malaysiaFacilities } from "@/lib/malaysia-facilities";
 import { otherEstablishments } from "@/lib/other-establishments";
@@ -278,6 +278,8 @@ async function ensureCategoryEstablishments() {
 
 export async function ensureSeeded() {
   if (seeded) return;
+
+  await ensureSchema();
 
   const [userCount] = await db.select({ value: count() }).from(users);
   if (Number(userCount.value) === 0) {
